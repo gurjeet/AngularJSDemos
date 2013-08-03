@@ -1,0 +1,42 @@
+﻿<div class="container" data-ng-app="demoApp">
+	<h3>Adding a Module, Controller and Factory</h3>
+</div>
+
+<script>
+
+    var demoApp = angular.module('demoApp', []);
+
+    demoApp.factory('simpleFactory', function () {
+        var factory = {};
+        var customers = [
+			{ name: 'Dave Jones', city: 'Phoenix' },
+			{ name: 'Jamie Riley', city: 'Atlanta' },
+			{ name: 'Heedy Wahlin', city: 'Chandler' },
+			{ name: 'Thomas Winter', city: 'Seattle' }
+        ];
+
+        factory.getCustomers = function () {
+            //Can use $http object to retrieve remote data
+            //in a "real" app
+            return customers;
+        };
+        return factory;
+    });
+
+    demoApp.controller('SimpleController', function ($scope, simpleFactory) {
+        $scope.customers = [];
+
+        init();
+        function init() {
+           $scope.customers = simpleFactory.getCustomers();
+        }
+
+        $scope.addCustomer = function () {
+            $scope.customers.push(
+			{
+			    name: $scope.inputData.name,
+			    city: $scope.inputData.city
+			});
+        }
+    });
+</script>

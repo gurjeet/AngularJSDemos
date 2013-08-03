@@ -1,0 +1,14 @@
+﻿<div class="container" data-ng-controller="SimpleController">
+    <h3>Adding a Simple Controller</h3>
+    <ul>
+        <li data-ng-repeat="name in names">{{name}}</li>
+    </ul>
+</div>
+
+<script>
+    function SimpleController($scope) {
+        $scope.names = ['Dave', 'Napur', 'Heedy', 'Shriva'];
+	}
+</script>
+
+

@@ -1,0 +1,44 @@
+﻿<div class="container" data-ng-app="demoApp">
+	<div data-ng-controller="SimpleController">
+		<h3>Adding a Module and Controller</h3>
+		Name:<br />
+		<input type="text" data-ng-model="inputData.name" placeholder="name" />
+		<br />
+		City:<br />
+		<input type="text" data-ng-model="inputData.city" placeholder="city" />
+		<br />
+		<button class="btn btn-primary" data-ng-click="addCustomer()">Add Customer</button>
+		<br />
+		<br />
+
+		Filter by Name:
+		<input type="text" data-ng-model="nameText" />
+		<br />
+		<ul>
+			<li data-ng-repeat="customer in customers | filter:nameText | orderBy:'name'">{{ customer.name }} - {{ customer.city }}</li>
+		</ul>
+	</div>
+</div>
+
+<script>
+	function SimpleController($scope) {
+		$scope.customers = [
+			{ name: 'Dave Jones', city: 'Phoenix' },
+			{ name: 'Jamie Riley', city: 'Atlanta' },
+			{ name: 'Heedy Wahlin', city: 'Chandler' },
+			{ name: 'Thomas Winter', city: 'Seattle' }
+		];
+
+		$scope.addCustomer = function () {
+			$scope.customers.push(
+			{
+				name: $scope.inputData.name,
+				city: $scope.inputData.city
+			});
+		}
+	}
+
+	var demoApp = angular.module('demoApp', []);
+
+	demoApp.controller('SimpleController', SimpleController);
+</script>
